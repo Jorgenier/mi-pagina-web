@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Silla moderna | Mi Tienda</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-inner container">
+      <a class="brand" href="index.html">
+        <img src="img/logo.png" alt="Mi Tienda" style="height:36px; width:auto;">
+        Mi Tienda
+      </a>
+      <nav class="nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="#">Cabeceros</a></li>
+          <li><a href="#">Mesas de noche</a></li>
+          <li><a href="#">Muebles</a></li>
+          <li><a href="#">Sillas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-wrap ficha-producto" id="main">
+    <a href="index.html" style="display:inline-block;margin:1rem 0;color:#0077cc;">← Volver al catálogo</a>
+
+    <div class="galeria">
+      <div class="imagen-principal">
+        <img id="imagenGrande" src="img/silla1.jpg" alt="Silla moderna - vista frontal">
+      </div>
+
+      <div class="miniaturas" aria-label="Miniaturas">
+        <img src="img/silla1.jpg" alt="Frontal" onclick="mostrarImagen(this)" tabindex="0" />
+        <img src="img/lado.jpg" alt="Lateral" onclick="mostrarImagen(this)" tabindex="0" />
+      </div>
+    </div>
+
+    <h1>Silla moderna</h1>
+    <p><strong>Medidas:</strong> 50 × 45 × 90 cm</p>
+    <p class="precio"><strong>Precio:</strong> 75,00 €</p>
+    <p class="entrega"><strong>Entrega:</strong> 6 - 8 días</p>
+
+    <section aria-label="Descripción">
+      <h2>Descripción</h2>
+      <p>Silla tapizada con estructura resistente, apta para comedor o despacho. Diseño ergonómico y fácil limpieza.</p>
+    </section>
+
+    <button onclick="alert('Añadido al carrito (demo)')" style="margin-top:1rem;">Comprar ahora</button>
+  </main>
+
+  <!-- Modal para imagen grande -->
+  <div id="modal" class="modal" role="dialog" aria-hidden="true">
+    <span class="cerrar" onclick="cerrarModal()" aria-label="Cerrar">×</span>
+    <img id="modal-img" src="" alt="">
+  </div>
+
+  <footer class="footer-pro" role="contentinfo">
+    <div class="footer-copy">
+      <p>©2025 Mi Tienda | Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <script>
+    function mostrarImagen(img) {
+      const imagenGrande = document.getElementById('imagenGrande');
+      imagenGrande.src = img.src;
+      imagenGrande.alt = img.alt || '';
+    }
+
+    document.getElementById('imagenGrande').addEventListener('click', () => {
+      const modal = document.getElementById('modal');
+      const modalImg = document.getElementById('modal-img');
+      modal.style.display = 'flex';
+      modal.setAttribute('aria-hidden','false');
+      modalImg.src = document.getElementById('imagenGrande').src;
+      modalImg.alt = document.getElementById('imagenGrande').alt || '';
+    });
+
+    function cerrarModal() {
+      const modal = document.getElementById('modal');
+      const modalImg = document.getElementById('modal-img');
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden','true');
+      modalImg.src = '';
+      modalImg.alt = '';
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') cerrarModal();
+    });
+  </script>
+</body>
+</html>

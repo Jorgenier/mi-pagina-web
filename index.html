@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mi Tienda | Muebles y Decoración</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-inner container">
+      <a class="brand" href="index.html">
+        <img src="img/logo.png" alt="Mi Tienda" style="height:36px; width:auto;">
+        Mi Tienda
+      </a>
+
+      <nav class="nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="#">Cabeceros</a></li>
+          <li><a href="#">Mesas de noche</a></li>
+          <li><a href="#">Muebles</a></li>
+          <li><a href="#">Sillas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO / BANNER -->
+  <section class="hero" role="banner">
+    <img src="img/banner.jpg" alt="Promoción destacada">
+    <div class="hero-texto container">
+      <h2>Descubre nuestros muebles desde 19,95 €</h2>
+      <a href="#catalogo" class="boton-hero">Ver catálogo</a>
+    </div>
+  </section>
+
+  <!-- CATEGORÍAS DESTACADAS -->
+  <section class="categorias">
+    <div class="categoria">
+      <img src="img/cabecero1.jpg" alt="Cabeceros">
+      <h3>Cabeceros desde 99,95 €</h3>
+      <a href="#">Ver todas</a>
+    </div>
+    <div class="categoria">
+      <img src="img/cabecero1.jpg" alt="Mesitas">
+      <h3>Mesitas desde 39,95 €</h3>
+      <a href="#">Ver todas</a>
+    </div>
+    <div class="categoria">
+      <img src="img/cabecero1.jpg " alt="Sillas">
+      <h3>Sillas desde 19,95 €</h3>
+      <a href="#">Ver todas</a>
+    </div>
+  </section>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="main-wrap" id="main">
+    <!-- PRODUCTOS / CATÁLOGO -->
+    <section id="catalogo" class="productos">
+      <h3>Productos destacados</h3>
+
+      <div class="busqueda">
+        <input type="text" id="buscador" placeholder="Buscar por nombre o precio" oninput="buscarProductos()" />
+      </div>
+
+      <div class="filtros" role="tablist" aria-label="Filtros de categoría">
+        <button onclick="filtrar('todos')">Todos</button>
+        <button onclick="filtrar('cabeceros')">Cabeceros</button>
+        <button onclick="filtrar('mesitas')">Mesitas de noche</button>
+        <button onclick="filtrar('sillas')">Sillas</button>
+      </div>
+
+      <div class="grid" id="grid-productos">
+        <!-- Producto 1 -->
+        <article class="producto cabeceros" data-visible="true">
+          <span class="etiqueta">Nuevo</span>
+          <a href="producto-cabecero.html" aria-label="Cabecero moderno">
+            <img src="img/cabecero1.jpg" alt="Cabecero moderno">
+            <h4>Cabecero moderno</h4>
+            <p>Medidas: 140x70x4 cm</p>
+            <p class="precio">Precio: 300,00 €</p>
+            <p class="entrega">Entrega en 6 - 8 días</p>
+          </a>
+        </article>
+
+        <!-- Producto 2 -->
+        <article class="producto mesitas" data-visible="true">
+          <a href="producto-mesita.html" aria-label="Mesita de noche moderna">
+            <img src="img/frente.jpg" alt="Mesita de noche moderna">
+            <h4>Mesita de noche moderna</h4>
+            <p>Medidas: 45x40x40 cm</p>
+            <p class="precio">Precio: 120,00 €</p>
+            <p class="entrega">Entrega en 6 - 8 días</p>
+          </a>
+        </article>
+
+        <!-- Producto 3 -->
+        <article class="producto sillas" data-visible="true">
+          <span class="etiqueta">Nuevo</span>
+          <a href="producto-silla.html" aria-label="Silla moderna">
+            <img src="img/cabecero1.jpg" alt="Silla moderna">
+            <h4>Silla moderna</h4>
+            <p>Medidas: 50x45x90 cm</p>
+            <p class="precio">Precio: 75,00 €</p>
+            <p class="entrega">Entrega en 6 - 8 días</p>
+          </a> 
+        </article>
+
+        <!-- Puedes duplicar y añadir más productos aquí manteniendo la misma estructura -->
+      </div>
+    </section>
+
+    <!-- GALERÍA SOCIAL / INSPIRACIÓN -->
+    <section class="galeria-social">
+      <h3>Inspiración y trabajos recientes</h3>
+      <div class="grid-social">
+        <img src="img/cabecero1.jpg" alt="Cabecero en dormitorio moderno" tabindex="0">
+        <img src="img/frente.jpg" alt="Detalle de costura artesanal" tabindex="0">
+        <img src="img/lado.jpg" alt="Mesita de noche en ambiente real" tabindex="0">
+        <img src="img/frente.jpg" alt="Silla moderna en comedor" tabindex="0">
+        <img src="img/lado.jpg" alt="Cliente feliz con su cabecero" tabindex="0">
+      </div>
+    </section>
+
+    <!-- RESEÑAS -->
+    <section class="reseñas" aria-label="Reseñas de clientes">
+      <h2>No tienes que creernos, nuestros clientes lo dicen</h2>
+
+      <div class="reseña">
+        <div class="estrellas" aria-hidden="true">★★★★★</div>
+        <p><strong>Verificado</strong> — Envío rápido y sencillo, muy fácil de montar y queda muy bien.</p>
+      </div>
+
+      <div class="reseña">
+        <div class="estrellas" aria-hidden="true">★★★★☆</div>
+        <p><strong>Verificado</strong> — Excepcional calidad y diseño, encantados con el resultado.</p>
+      </div>
+
+      <div class="trustpilot-mini">
+        <p>TrustScore 3.5 sobre 5 basado en 7.084 opiniones</p>
+        <img src="img/trustpilot.png" alt="Trustpilot" style="width:100px; margin-top:6px;">
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter" aria-label="Suscripción newsletter">
+      <h2>¡Suscríbete y llévate 10€ de regalo!</h2>
+      <p>Recibe novedades y descuentos exclusivos.</p>
+      <form class="form-newsletter" onsubmit="event.preventDefault(); alert('Gracias por suscribirte');">
+        <input type="email" placeholder="Escribe tu correo" required>
+        <button type="submit">SUSCRÍBETE</button>
+      </form>
+      <label class="legal-check">
+        <input type="checkbox" required>
+        Estoy de acuerdo con la política de privacidad.
+      </label>
+    </section>
+  </main>
+
+  <!-- MODAL PARA GALERÍA -->
+  <div id="modal" class="modal" role="dialog" aria-hidden="true">
+    <span class="cerrar" onclick="cerrarModal()" aria-label="Cerrar">×</span>
+    <img id="modal-img" src="" alt="">
+  </div>
+
+  <!-- FOOTER PROFESIONAL -->
+  <footer class="footer-pro" role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <h4>SOBRE NOSOTROS</h4>
+        <ul>
+          <li><a href="#">Quiénes somos</a></li>
+          <li><a href="#">Compromisos éticos</a></li>
+          <li><a href="#">Condiciones generales</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>ENLACES DE INTERÉS</h4>
+        <ul>
+          <li><a href="#">Envíos</a></li>
+          <li><a href="#">Devoluciones y cambios</a></li>
+          <li><a href="#">Garantía</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>CONTACTO Y AYUDA</h4>
+        <ul>
+          <li><a href="#">Horario atención</a></li>
+          <li><a href="#">Estado de pedido</a></li>
+          <li><a href="#">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+      <div class="trustpilot">
+        <p>TrustScore 3.5 | 7.084 opiniones</p>
+        <img src="img/trustpilot.png" alt="Trustpilot">
+      </div>
+    </div>
+
+    <div class="footer-pagos" aria-hidden="true">
+      <img src="img/visa.png" alt="VISA">
+      <img src="img/mastercard.png" alt="MasterCard">
+      <img src="img/paypal.png" alt="PayPal">
+    </div>
+
+    <div class="footer-copy">
+      <p>©2025 Mi Tienda | Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS: filtrado, búsqueda y modal -->
+  <script>
+    // Filtrar por categoría
+    function filtrar(categoria) {
+      const productos = document.querySelectorAll('.producto');
+      productos.forEach(producto => {
+        if (categoria === 'todos') {
+          producto.dataset.visible = 'true';
+        } else {
+          producto.dataset.visible = producto.classList.contains(categoria) ? 'true' : 'false';
+        }
+      });
+      aplicarBusqueda();
+    }
+
+    // Buscar texto o precio
+    function buscarProductos() {
+      aplicarBusqueda();
+    }
+
+    function aplicarBusqueda() {
+      const texto = document.getElementById('buscador').value.toLowerCase().trim();
+      const productos = document.querySelectorAll('.producto');
+
+      productos.forEach(producto => {
+        const visiblePorCategoria = producto.dataset.visible !== 'false';
+
+        const nombreEl = producto.querySelector('h4');
+        const nombre = nombreEl ? nombreEl.textContent.toLowerCase() : '';
+
+        const precioEl = producto.querySelector('.precio');
+        const precioTexto = precioEl ? precioEl.textContent.replace(/[^\d,\.]/g,'') : '';
+        const precioMatch = precioTexto.match(/(\d+)[,.]?(\d{0,2})?/);
+        const precio = precioMatch ? parseFloat(precioMatch[1] + '.' + (precioMatch[2] || '00')) : NaN;
+
+        const textoEsNumero = texto !== '' && !isNaN(parseFloat(texto.replace(',', '.')));
+        const coincideNombre = texto === '' ? true : nombre.includes(texto);
+        const coincidePrecio = textoEsNumero && !isNaN(precio) && precio <= parseFloat(texto.replace(',', '.'));
+
+        if (!visiblePorCategoria) {
+          producto.classList.add('oculto');
+        } else if ((coincideNombre || coincidePrecio) && (texto !== '' ? true : true)) {
+          producto.classList.remove('oculto');
+        } else {
+          // si hay texto para buscar y no coincide por nombre ni precio => ocultar
+          if (texto === '') {
+            producto.classList.remove('oculto');
+          } else {
+            producto.classList.add('oculto');
+          }
+        }
+      });
+    }
+
+    // Modal galería
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+
+    document.querySelectorAll('.grid-social img').forEach(img => {
+      img.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        modal.setAttribute('aria-hidden', 'false');
+        modalImg.src = img.src;
+        modalImg.alt = img.alt || '';
+      });
+      img.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          img.click();
+        }
+      });
+    });
+
+    function cerrarModal() {
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden', 'true');
+      modalImg.src = '';
+      modalImg.alt = '';
+    }
+
+    // Cerrar modal con Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.style.display === 'flex') {
+        cerrarModal();
+      }
+    });
+
+    // Inicializar: mostrar todos
+    document.addEventListener('DOMContentLoaded', () => {
+      filtrar('todos');
+    });
+  </script>
+</body>
+</html>
