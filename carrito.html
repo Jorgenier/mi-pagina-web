@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Carrito | Mi Tienda</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header> <!-- mantén el mismo header que en index.html --> </header>
+
+  <main class="main-wrap">
+    <h1>Tu carrito</h1>
+    <div id="lista-carrito"></div>
+
+    <div id="resumen-carrito" style="margin-top:1rem;"></div>
+
+    <div style="margin-top:1rem;">
+      <button onclick="vaciarCarrito()" style="background:#ff4d4d;color:#fff;padding:.6rem 1rem;border-radius:8px;border:0;">Vaciar carrito</button>
+    </div>
+  </main>
+
+  <footer> <!-- footer idéntico al index --> </footer>
+
+  <script>
+    function mostrarCarrito() {
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      const cont = document.getElementById('lista-carrito');
+      if (!cont) return;
+      if (carrito.length === 0) {
+        cont.innerHTML = '<p>No hay productos en el carrito.</p>';
+        document.getElementById('resumen-carrito').innerHTML = '';
+        return;
+      }
+      cont.innerHTML = carrito.map((p, i) => `
+        <div class="item-carrito" style="display:flex;gap:1rem;align-items:center;border:1px solid #eaeaea;padding:1rem;border-radius:8px;margin-bottom:0.75rem;">
+          <img src="${p.imagen}" alt="${p.nombre}" style="width:90px;height:70px;object-fit:cover;border-radius:6px;">
+          <div style="flex:1;">
+            <h3 style="margin:0 0 .25rem 0;">${p.nombre}</h3>
+            <p style="margin:0;color:#666;">Precio: ${Number(p.precio).toFixed(2)} €</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:.5rem;">
+            <button onclick="eliminarDelCarrito(${i})" style="background:#fff;border:1px solid #ddd;padding:.4rem .6rem;border-radius:6px;cursor:pointer;">Eliminar</button>
+          </div>
+        </div>
+      `).join('');
+      const total = carrito.reduce((s, it) => s + Number(it.precio), 0);
+      document.getElementById('resumen-carrito').innerHTML = `<strong>Total:</strong> ${total.toFixed(2)} €`;
+    }
+
+    function eliminarDelCarrito(index) {
+      let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      carrito.splice(index, 1);
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      mostrarCarrito();
+      actualizarContadorCarrito();
+    }
+
+    function vaciarCarrito() {
+      localStorage.removeItem('carrito');
+      mostrarCarrito();
+      actualizarContadorCarrito();
+      mostrarToast('Carrito vaciado');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      mostrarCarrito();
+      actualizarContadorCarrito();
+    });
+  </script>
+</body>
+</html>

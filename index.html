@@ -7,24 +7,34 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  
   <header>
-    <div class="header-inner container">
-      <a class="brand" href="index.html">
-        <img src="img/logo.png" alt="Mi Tienda" style="height:36px; width:auto;">
-        Mi Tienda
-      </a>
+  <div class="header-inner container">
+    <a class="brand" href="index.html">
+      <img src="img/logo.png" alt="Mi Tienda" style="height:36px; width:auto;">
+      Mi Tienda
+    </a>
 
-      <nav class="nav" aria-label="Navegación principal">
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="#">Cabeceros</a></li>
-          <li><a href="#">Mesas de noche</a></li>
-          <li><a href="#">Muebles</a></li>
-          <li><a href="#">Sillas</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <nav class="nav" aria-label="Navegación principal">
+      <button class="nav-toggle" onclick="toggleMenu()" aria-expanded="false" aria-controls="nav-menu">☰</button>
+      <ul id="nav-menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="#">Cabeceros</a></li>
+        <li><a href="#">Mesas de noche</a></li>
+        <li><a href="#">Muebles</a></li>
+        <li><a href="#">Sillas</a></li>
+      </ul>
+    </nav>
+
+    <a href="carrito.html" class="carrito-icono" aria-label="Ver carrito">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="10" cy="20" r="1" fill="#111"/><circle cx="18" cy="20" r="1" fill="#111"/>
+      </svg>
+      <span id="contador-carrito">0</span>
+    </a>
+  </div>
+</header>
 
   <!-- HERO / BANNER -->
   <section class="hero" role="banner">
@@ -81,6 +91,7 @@
             <p>Medidas: 140x70x4 cm</p>
             <p class="precio">Precio: 300,00 €</p>
             <p class="entrega">Entrega en 6 - 8 días</p>
+            <button onclick="agregarAlCarrito('cabecero-140-01','Cabecero moderno',300.00,'img/cabecero1.jpg')">Añadir al carrito</button>
           </a>
         </article>
 
@@ -210,7 +221,7 @@
 
   <!-- SCRIPTS: filtrado, búsqueda y modal -->
   <script>
-    // Filtrar por categoría
+    <!-- Filtrar por categoría-->
     function filtrar(categoria) {
       const productos = document.querySelectorAll('.producto');
       productos.forEach(producto => {
@@ -223,7 +234,7 @@
       aplicarBusqueda();
     }
 
-    // Buscar texto o precio
+    <!-- Buscar texto o precio-->
     function buscarProductos() {
       aplicarBusqueda();
     }
@@ -262,7 +273,7 @@
       });
     }
 
-    // Modal galería
+    <!-- Modal galería-->
     const modal = document.getElementById('modal');
     const modalImg = document.getElementById('modal-img');
 
@@ -288,17 +299,92 @@
       modalImg.alt = '';
     }
 
-    // Cerrar modal con Escape
+    <!-- Cerrar modal con Escape-->
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && modal.style.display === 'flex') {
         cerrarModal();
       }
     });
 
-    // Inicializar: mostrar todos
+   <!-- Inicializar: mostrar todos-->
     document.addEventListener('DOMContentLoaded', () => {
       filtrar('todos');
     });
   </script>
-</body>
+<script>
+function toggleMenu() {
+  const menu = document.getElementById('nav-menu');
+  menu.classList.toggle('show');
+}
+</script> 
+
+<script>
+<!--Menu hamburguesa -->
+function toggleMenu() {
+  const menu = document.getElementById('nav-menu');
+  const btn = document.querySelector('.nav-toggle');
+  const expanded = btn.getAttribute('aria-expanded') === 'true';
+  if (menu) menu.classList.toggle('show');
+  btn.setAttribute('aria-expanded', String(!expanded));
+}
+
+<!--Carrito en localStorage -->
+function agregarAlCarrito(id, nombre, precio, imagen) {
+  const producto = { id, nombre, precio: Number(precio), imagen };
+  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  carrito.push(producto);
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+  actualizarContadorCarrito();
+  <!-- feedback visual ligero-->
+  mostrarToast('Añadido al carrito');
+}
+
+<!--Actualiza contador del header -->
+function actualizarContadorCarrito() {
+  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  const contador = document.getElementById('contador-carrito');
+  if (contador) contador.textContent = carrito.length;
+}
+
+<!--Mostrar toast pequeño en pantalla (no intrusivo) -->
+function mostrarToast(texto) {
+  let toast = document.getElementById('toast-carrito');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'toast-carrito';
+    toast.style.position = 'fixed';
+    toast.style.right = '16px';
+    toast.style.bottom = '18px';
+    toast.style.background = 'rgba(0,0,0,0.8)';
+    toast.style.color = '#fff';
+    toast.style.padding = '8px 12px';
+    toast.style.borderRadius = '8px';
+    toast.style.zIndex = '2000';
+    toast.style.fontSize = '0.95rem';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = texto;
+  toast.style.opacity = '1';
+  clearTimeout(toast._t);
+  toast._t = setTimeout(()=>{ toast.style.opacity='0'; }, 1700);
+}
+
+ <!--Inicializaciones al cargar la página -->
+document.addEventListener('DOMContentLoaded', () => {
+  actualizarContadorCarrito();
+
+ <!--  Cerrar menú al tocar fuera (mobile)-->
+  document.addEventListener('click', (e) => {
+    const menu = document.getElementById('nav-menu');
+    const btn = document.querySelector('.nav-toggle');
+    if (!menu || !btn) return;
+    if (menu.classList.contains('show') && !menu.contains(e.target) && !btn.contains(e.target)) {
+      menu.classList.remove('show');
+      btn.setAttribute('aria-expanded','false');
+    }
+  });
+});
+</script>
+
+</body
 </html>
