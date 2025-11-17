@@ -7,14 +7,13 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Header (igual que index.html) -->
   <header>
     <div class="header-inner container">
-      <a class="brand" href="index.html">
-        <img src="img/logo.png" alt="Mi Tienda" style="height:36px; width:auto;">
-        Mi Tienda
-      </a>
+      <a class="brand" href="index.html"><img src="img/logo.png" alt="Mi Tienda" class="logo"><span class="brand-text">Mi Tienda</span></a>
       <nav class="nav" aria-label="Navegación principal">
-        <ul>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" onclick="toggleMenu()" aria-label="Abrir menú">☰</button>
+        <ul id="nav-menu">
           <li><a href="index.html">Inicio</a></li>
           <li><a href="#">Cabeceros</a></li>
           <li><a href="#">Mesas de noche</a></li>
@@ -22,24 +21,22 @@
           <li><a href="#">Sillas</a></li>
         </ul>
       </nav>
+      <a href="carrito.html" class="carrito-icono" aria-label="Ver carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1" fill="#111"/><circle cx="18" cy="20" r="1" fill="#111"/></svg><span id="contador-carrito" aria-live="polite">0</span></a>
     </div>
   </header>
 
-  <main class="main-wrap-producto ficha-producto" id="main">
-    <div class="boton-volver-inicio">
-      <button onclick="window.location.href='index.html'">
-      <a href="index.html" style="display:inline-block;margin:1rem 0;color:#0077cc;">← Volver al catálogo</a>
-    </div>
- 
+  <main class="main-wrap ficha-producto container" id="main">
+    <a href="index.html" class="volver" style="display:inline-block;margin:1rem 0;color:#0077cc;">← Volver al catálogo</a>
+
     <div class="galeria">
       <div class="imagen-principal">
-        <img id="imagenGrande" src="img/frente.jpg" alt="Cabecero moderno - vista frontal">
+        <img id="imagenGrande" src="img/cabecero1.jpg" alt="Cabecero moderno - vista frontal" style="max-width:100%;cursor:pointer;">
       </div>
 
       <div class="miniaturas" aria-label="Miniaturas">
-        <img src="img/frente.jpg" alt="Frontal" onclick="mostrarImagen(this)" tabindex="0" />
-        <img src="img/lado.jpg" alt="Lateral" onclick="mostrarImagen(this)" tabindex="0" />
-        <img src="img/cabecero1.jpg" alt="Detalle de costura" onclick="mostrarImagen(this)" tabindex="0" />
+        <img src="img/cabecero1.jpg" alt="Frontal" onclick="mostrarImagen(this)" tabindex="0" />
+        <img src="img/frente.jpg" alt="Lateral" onclick="mostrarImagen(this)" tabindex="0" />
+        <img src="img/detalle.jpg" alt="Detalle" onclick="mostrarImagen(this)" tabindex="0" />
       </div>
     </div>
 
@@ -53,21 +50,18 @@
       <p>Cabecero tapizado de diseño moderno, con acabado capitoné y detalles de costura artesanal. Materiales resistentes y fácil montaje.</p>
     </section>
 
-    <button onclick="agregarAlCarrito('cabecero-140-01', 'Cabecero moderno', 300.00, 'img/cabecero1.jpg')">
-  Añadir al carrito
-</button>
+    <button class="btn-add" onclick="agregarAlCarrito('cabecero-140-01','Cabecero moderno',300.00,'img/cabecero1.jpg')">Añadir al carrito</button>
   </main>
 
   <!-- Modal para imagen grande -->
-  <div id="modal" class="modal" role="dialog" aria-hidden="true">
-    <span class="cerrar" onclick="cerrarModal()" aria-label="Cerrar">×</span>
+  <div id="modal" class="modal" role="dialog" aria-hidden="true" aria-label="Imagen ampliada">
+    <button class="cerrar" onclick="cerrarModal()" aria-label="Cerrar modal">×</button>
     <img id="modal-img" src="" alt="">
   </div>
 
+  <!-- Footer (igual que index.html) -->
   <footer class="footer-pro" role="contentinfo">
-    <div class="footer-copy">
-      <p>©2025 Mi Tienda | Todos los derechos reservados</p>
-    </div>
+    <div class="footer-copy container"><p>©2025 Mi Tienda | Todos los derechos reservados</p></div>
   </footer>
 
   <script>
@@ -76,16 +70,10 @@
       imagenGrande.src = img.src;
       imagenGrande.alt = img.alt || '';
     }
-
     document.getElementById('imagenGrande').addEventListener('click', () => {
-      const modal = document.getElementById('modal');
-      const modalImg = document.getElementById('modal-img');
-      modal.style.display = 'flex';
-      modal.setAttribute('aria-hidden','false');
-      modalImg.src = document.getElementById('imagenGrande').src;
-      modalImg.alt = document.getElementById('imagenGrande').alt || '';
+      const img = document.getElementById('imagenGrande');
+      abrirModal(img);
     });
-
     function cerrarModal() {
       const modal = document.getElementById('modal');
       const modalImg = document.getElementById('modal-img');
@@ -94,10 +82,9 @@
       modalImg.src = '';
       modalImg.alt = '';
     }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') cerrarModal();
-    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') cerrarModal(); });
+    // Keep header counter in sync
+    document.addEventListener('DOMContentLoaded', ()=>{ actualizarContadorCarrito(); });
   </script>
 </body>
 </html>

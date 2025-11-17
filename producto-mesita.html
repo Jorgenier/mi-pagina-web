@@ -9,12 +9,10 @@
 <body>
   <header>
     <div class="header-inner container">
-      <a class="brand" href="index.html">
-        <img src="img/logo.png" alt="Mi Tienda" style="height:36px; width:auto;">
-        Mi Tienda
-      </a>
+      <a class="brand" href="index.html"><img src="img/logo.png" alt="Mi Tienda" class="logo"><span class="brand-text">Mi Tienda</span></a>
       <nav class="nav" aria-label="Navegación principal">
-        <ul>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" onclick="toggleMenu()" aria-label="Abrir menú">☰</button>
+        <ul id="nav-menu">
           <li><a href="index.html">Inicio</a></li>
           <li><a href="#">Cabeceros</a></li>
           <li><a href="#">Mesas de noche</a></li>
@@ -22,19 +20,20 @@
           <li><a href="#">Sillas</a></li>
         </ul>
       </nav>
+      <a href="carrito.html" class="carrito-icono" aria-label="Ver carrito"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1" fill="#111"/><circle cx="18" cy="20" r="1" fill="#111"/></svg><span id="contador-carrito" aria-live="polite">0</span></a>
     </div>
   </header>
 
-  <main class="main-wrap ficha-producto" id="main">
-    <a href="index.html" style="display:inline-block;margin:1rem 0;color:#0077cc;">← Volver al catálogo</a>
+  <main class="main-wrap ficha-producto container" id="main">
+    <a href="index.html" class="volver" style="display:inline-block;margin:1rem 0;color:#0077cc;">← Volver al catálogo</a>
 
     <div class="galeria">
       <div class="imagen-principal">
-        <img id="imagenGrande" src="img/frente.jpg" alt="Mesita moderna - vista frontal">
+        <img id="imagenGrande" src="img/mesita1.jpg" alt="Mesita moderna - vista frontal" style="max-width:100%;cursor:pointer;">
       </div>
 
       <div class="miniaturas" aria-label="Miniaturas">
-        <img src="img/frente.jpg" alt="Frente" onclick="mostrarImagen(this)" tabindex="0" />
+        <img src="img/mesita1.jpg" alt="Frente" onclick="mostrarImagen(this)" tabindex="0" />
         <img src="img/lado.jpg" alt="Lateral" onclick="mostrarImagen(this)" tabindex="0" />
       </div>
     </div>
@@ -44,54 +43,24 @@
     <p class="precio"><strong>Precio:</strong> 120,00 €</p>
     <p class="entrega"><strong>Entrega:</strong> 6 - 8 días</p>
 
-    <section aria-label="Descripción">
-      <h2>Descripción</h2>
-      <p>Mesita de noche con acabado contemporáneo, cajón suave y superficie resistente. Perfecta para ambientes minimalistas.</p>
-    </section>
+    <section aria-label="Descripción"><h2>Descripción</h2><p>Mesita de noche con acabado contemporáneo, cajón suave y superficie resistente. Perfecta para ambientes minimalistas.</p></section>
 
-    <button onclick="alert('Añadido al carrito (demo)')" style="margin-top:1rem;">Comprar ahora</button>
+    <button class="btn-add" onclick="agregarAlCarrito('mesita-45-01','Mesita de noche moderna',120.00,'img/mesita1.jpg')">Añadir al carrito</button>
   </main>
 
-  <!-- Modal para imagen grande -->
-  <div id="modal" class="modal" role="dialog" aria-hidden="true">
-    <span class="cerrar" onclick="cerrarModal()" aria-label="Cerrar">×</span>
+  <div id="modal" class="modal" role="dialog" aria-hidden="true" aria-label="Imagen ampliada">
+    <button class="cerrar" onclick="cerrarModal()" aria-label="Cerrar modal">×</button>
     <img id="modal-img" src="" alt="">
   </div>
 
-  <footer class="footer-pro" role="contentinfo">
-    <div class="footer-copy">
-      <p>©2025 Mi Tienda | Todos los derechos reservados</p>
-    </div>
-  </footer>
+  <footer class="footer-pro" role="contentinfo"><div class="footer-copy container"><p>©2025 Mi Tienda | Todos los derechos reservados</p></div></footer>
 
   <script>
-    function mostrarImagen(img) {
-      const imagenGrande = document.getElementById('imagenGrande');
-      imagenGrande.src = img.src;
-      imagenGrande.alt = img.alt || '';
-    }
-
-    document.getElementById('imagenGrande').addEventListener('click', () => {
-      const modal = document.getElementById('modal');
-      const modalImg = document.getElementById('modal-img');
-      modal.style.display = 'flex';
-      modal.setAttribute('aria-hidden','false');
-      modalImg.src = document.getElementById('imagenGrande').src;
-      modalImg.alt = document.getElementById('imagenGrande').alt || '';
-    });
-
-    function cerrarModal() {
-      const modal = document.getElementById('modal');
-      const modalImg = document.getElementById('modal-img');
-      modal.style.display = 'none';
-      modal.setAttribute('aria-hidden','true');
-      modalImg.src = '';
-      modalImg.alt = '';
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') cerrarModal();
-    });
+    function mostrarImagen(img) { const imagenGrande = document.getElementById('imagenGrande'); imagenGrande.src = img.src; imagenGrande.alt = img.alt || ''; }
+    document.getElementById('imagenGrande').addEventListener('click', ()=>{ abrirModal(document.getElementById('imagenGrande')); });
+    function cerrarModal(){ const modal = document.getElementById('modal'); const modalImg = document.getElementById('modal-img'); modal.style.display='none'; modal.setAttribute('aria-hidden','true'); modalImg.src=''; modalImg.alt=''; }
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') cerrarModal(); });
+    document.addEventListener('DOMContentLoaded', ()=>{ actualizarContadorCarrito(); });
   </script>
 </body>
 </html>
