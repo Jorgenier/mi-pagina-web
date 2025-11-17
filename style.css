@@ -60,14 +60,17 @@ header {
 .categorias { background: #0a0a0a; color: #fff; padding: 2rem 1rem; }
 .cartel-ofertas { text-align: center; margin-bottom: 2rem; display: flex; justify-content: center; align-items: center; padding: 0.5rem 1rem;}
 .cartel-ofertas h2 { color: #ffffff; font-size: 2rem; margin: 0; font-weight: 800;text-shadow: 0 2px 6px rgba(0,0,0,0.4); line-height: 1.1;}
-.grid-categorias { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));  } 
-.categoria { position: relative; height: 200px; border-radius: 12px; overflow: hidden ; box-shadow: 0 6px 18px rgba(0,0,0,0.3); background: #111;}
+.grid-categorias { display: grid; gap: 0.5rem; grid-template-columns: repeat(2,1fr); } 
+.categoria { position: relative; height: 200px; border-radius: none; overflow: hidden ; box-shadow: 0 6px 18px rgba(0,0,0,0.3); background: #111;}
+.todo-ancho {grid-column: 1 / -1;}
 .fondo-categoria { position: absolute; inset: 0; background-size: cover; background-position: center; filter: none !important; -webkit-filter: none !important; transform: scale(1.02); will-change: transform; }
-.contenido-categoria { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;  text-align: center; padding: 1rem; }
-.categoria h3 { position:relative; z-index:2; text-align:center; color:#fff; padding:1rem 1.25rem; border-radius:10px; max-width:900px; }
-.categoria a {  color: #fff;  text-decoration: underline; font-weight: 600; font-size: 0.95rem; }
+.contenido-categoria { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;  text-align: center; padding: 0.5rem; }
+.categoria h3 { position:relative; margin: 0 0 0.4rem 0; text-align:center; color:#fff; border-radius:10px; max-width:900px; font-size: 1rem;line-height: 1.2; }
+.categoria a {  color: #fff;  text-decoration: underline; font-weight: 600; font-size: 0.9rem; margin: 0;}
 @media (max-width: 600px) {
-  .categoria { height: 150px; }
+  .grid-categorias { grid-template-columns: repeat(2 , 1fr); gap: 1rem;}
+  .categoria {height: 200px;}
+  .todo-ancho{grid-column: 1 / -1;}
   .cartel-ofertas h2 { font-size: 1.5rem; }
 }
 
