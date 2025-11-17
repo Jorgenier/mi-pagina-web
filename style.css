@@ -170,11 +170,175 @@ header {
   .grid { grid-template-columns: repeat(1, 1fr); }
   .producto img { height:140px; }
   .categoria img { height:100px; }
-  .footer-grid { grid-template-columns: 1fr; text-align:center; }
   .form-newsletter input[type="email"] { width:100%; max-width:420px; }
   .miniaturas img { width:70px; height:70px; }
   .ficha-producto { padding:1rem; }
 }
+
+/* Footer Pro - estilos base */
+.footer-pro {
+  background: #0a0a0a;
+  color: #e9e9e9;
+  font-size: 14px;
+  line-height: 1.35;
+  padding: 20px 12px 18px;
+  box-sizing: border-box;
+  width: 100%;
+  border-top: 1px solid rgba(255,255,255,0.03);
+  padding-bottom: calc(18px + env(safe-area-inset-bottom));
+}
+
+/* Contenedor central (usa tu .container si ya existe; si no, esta regla funciona igual) */
+.footer-pro .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Grid de columnas */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  align-items: start;
+  margin-bottom: 18px;
+}
+
+/* Columnas individuales */
+.footer-col h4 {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.01em;
+}
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-col li {
+  margin-bottom: 8px;
+}
+.footer-col a {
+  color: #d6d6d6;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+/* Trust / opiniones */
+.footer-trust .trust-score {
+  margin: 0 0 8px 0;
+  color: #dcdcdc;
+  font-size: 13px;
+}
+.footer-trust .trust-img {
+  max-width: 140px;
+  height: auto;
+  display: block;
+}
+
+/* Pagos: centrado y responsive */
+.footer-pagos {
+  margin-bottom: 14px;
+  width: 100%;
+}
+.footer-pagos .pagos-inner {
+  display:flex;
+  gap: 12px;
+  align-items:center;
+  justify-content:flex-start;
+  flex-wrap:wrap;
+}
+.footer-pagos img {
+  height: 22px;
+  width: auto;
+  display:block;
+  opacity: 0.98;
+}
+
+/* Copiright */
+.footer-copy {
+  border-top: 1px solid rgba(255,255,255,0.03);
+  padding-top: 12px;
+}
+.footer-copy p {
+  margin: 0;
+  color: #bfbfbf;
+  font-size: 13px;
+}
+
+/* Small tweaks for clickable areas and images */
+.footer-pro img { max-width: 100%; height: auto; display:block; }
+.footer-pro a { transition: color .15s ease; }
+.footer-pro a:hover { color: #ffffff; }
+
+/* Logos de footer: tamaño consistente en vertical y horizontal */
+.footer-pagos .pagos-inner {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Regla principal: limitar altura y permitir anchura automática */
+.footer-pagos img {
+  height: 22px;        /* altura base en escritorio / vertical */
+  max-height: 28px;    /* máxima que puede alcanzar si hay necesidad */
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* Responsive: tablet */
+@media (max-width: 992px) {
+  .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .footer-pagos .pagos-inner { justify-content: center; }
+}
+
+/* Responsive: móvil (comportamiento igual a klasthome: compacto y apilado) */
+@media (max-width: 480px) {
+  .footer-pro { padding: 14px 10px 12px; font-size: 13px; }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .footer-col h4 { font-size: 14px; }
+  .footer-col a { font-size: 14px; }
+  .footer-pagos .pagos-inner { justify-content: flex-start; gap: 10px; }
+  .footer-pagos img { height: 18px; }
+  .footer-trust .trust-img { max-width: 120px; }
+  .footer-copy { padding-top: 10px; }
+}
+
+/* Ajuste para móviles verticales (pequeñas pantallas) */
+@media (max-width: 480px) {
+  .footer-pagos img {
+    height: 18px;
+    max-height: 20px;
+  }
+}
+
+/* Ajuste para móvil horizontal y tablets: evitar crecimiento excesivo */
+@media (orientation: landscape), (min-width: 481px) and (max-width: 992px) {
+  .footer-pagos img {
+    height: 20px;        /* fuerza un tamaño más contenido en landscape */
+    max-height: 22px;
+  }
+}
+
+/* Si quieres que todos exactamente igual independientemente de pantalla */
+.footer-pagos img.equal-size {
+  height: 20px !important;
+  max-height: 20px !important;
+}
+
+/* Fallbacks y especificidad si hay reglas globales conflictivas */
+.footer-pro { z-index: 1; position: relative; }
+
 
 /* Focus accessibility */
 a:focus, button:focus, input:focus { outline: 3px solid rgba(0,119,204,0.18); outline-offset:3px; }
