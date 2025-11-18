@@ -18,31 +18,65 @@
 <body>
   <header>
     <div class="header-inner container">
+      <!-- Botón hamburguesa corregido -->
+      <button id="btn-hamburger" class="hamburger" aria-label="Abrir menú" aria-expanded="false" type="button">
+        <span class="hamburger-box">
+          <span class="hamburger-inner"></span>
+        </span>
+      </button>
+
       <a class="brand" href="index.html">
         <img src="img/logo.png" alt="Mi Tienda" class="logo">
         <span class="brand-text">ALFAcam</span>
       </a>
 
-      <nav class="nav" aria-label="Navegación principal">
-        <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" onclick="toggleMenu()" aria-label="Abrir menú">☰</button>
-        <ul id="nav-menu">
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="#">Cabeceros</a></li>
-          <li><a href="#">Mesas de noche</a></li>
-          <li><a href="#">Muebles</a></li>
-          <li><a href="#">Sillas</a></li>
-        </ul>
-      </nav>
-
       <a href="carrito.html" class="carrito-icono" aria-label="Ver carrito">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="10" cy="20" r="1" fill="#111"/><circle cx="18" cy="20" r="1" fill="#111"/>
+          <circle cx="10" cy="20" r="1" fill="#111"/>
+          <circle cx="18" cy="20" r="1" fill="#111"/>
         </svg>
         <span id="contador-carrito" aria-live="polite">0</span>
       </a>
     </div>
   </header>
+
+  <!-- START: panel lateral hamburguesa -->
+  <nav id="nav-panel" class="nav-panel" aria-hidden="true" role="dialog" aria-label="Menú principal">
+    <div class="nav-panel-inner">
+      <button id="btn-close-nav" class="nav-close" aria-label="Cerrar menú" type="button">&times;</button>
+
+      <div class="nav-top">
+        <a href="index.html" class="nav-logo">
+          <img src="img/logo.png" alt="Mi Tienda" />
+        </a>
+      </div>
+
+      <ul class="nav-list" role="menu">
+        <li class="nav-item"><a href="index.html" class="nav-link">Inicio</a></li>
+
+        <li class="nav-item has-children">
+          <button class="nav-link nav-toggle" aria-expanded="false" aria-controls="sub-catalogo" type="button">Catálogo</button>
+          <ul id="sub-catalogo" class="nav-sub" role="menu" hidden>
+            <li><a href="#catalogo" class="nav-sublink">Cabeceros</a></li>
+            <li><a href="#catalogo" class="nav-sublink">Mesitas</a></li>
+            <li><a href="#catalogo" class="nav-sublink">Sillas</a></li>
+            <li><a href="mobiliario.html" class="nav-sublink">Ver todo en mobiliario</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item"><a href="#catalogo" class="nav-link">Ofertas</a></li>
+        <li class="nav-item"><a href="#contacto" class="nav-link">Contacto</a></li>
+      </ul>
+
+      <div class="nav-footer">
+        <a href="#catalogo" class="btn-primary">Ver catálogo</a>
+      </div>
+    </div>
+
+    <div id="nav-overlay" class="nav-overlay" tabindex="-1"></div>
+  </nav>
+  <!-- END: panel lateral hamburguesa -->
 
   <!-- HERO / BANNER -->
   <section class="hero" role="banner">
@@ -54,36 +88,36 @@
   </section>
 
   <!-- CATEGORÍAS DESTACADAS -->
-
- <section class="categorias container" aria-label="Categorías destacadas">
+  <section class="categorias container" aria-label="Categorías destacadas">
     <div class="cartel-ofertas">
-        <h2>Las Ofertas mas top de noviembre</h2>
+      <h2>Las Ofertas mas top de noviembre</h2>
     </div>
     <div class="grid-categorias">
-         <article class="categoria">
-             <div class="fondo-categoria" style="background-image: url('img/frente.jpg');"></div>
-             <div class="contenido-categoria">
-                    <h3>Cabeceros desde 99,95 €</h3>
-                    <a href="#catalogo" class="ver-todas" data-category="cabeceros">Ver todas</a>
-             </div>    
-         </article>
-         <article class="categoria">
-             <div class="fondo-categoria" style="background-image: url('img/lado.jpg');"></div>
-             <div class="contenido-categoria">
-                    <h3>Mesitas desde 99,95 €</h3>
-                    <a href="#catalogo" class="ver-todas" data-category="mesitas">Ver todas</a>
-             </div>    
-         </article>
-         <article class="categoria todo-ancho">
-             <div class="fondo-categoria" style="background-image: url('img/frente.jpg');"></div>
-             <div class="contenido-categoria">
-                    <h3>Sillas desde 99,95 €</h3>
-                    <a href="#catalogo" class="ver-todas" data-category="sillas">Ver todas</a>
-             </div>    
-         </article>
+      <article class="categoria">
+        <div class="fondo-categoria" style="background-image: url('img/frente.jpg');"></div>
+        <div class="contenido-categoria">
+          <h3>Cabeceros desde 99,95 €</h3>
+          <a href="#catalogo" class="ver-todas" data-category="cabeceros">Ver todas</a>
+        </div>
+      </article>
+
+      <article class="categoria">
+        <div class="fondo-categoria" style="background-image: url('img/lado.jpg');"></div>
+        <div class="contenido-categoria">
+          <h3>Mesitas desde 99,95 €</h3>
+          <a href="#catalogo" class="ver-todas" data-category="mesitas">Ver todas</a>
+        </div>
+      </article>
+
+      <article class="categoria todo-ancho">
+        <div class="fondo-categoria" style="background-image: url('img/frente.jpg');"></div>
+        <div class="contenido-categoria">
+          <h3>Sillas desde 99,95 €</h3>
+          <a href="#catalogo" class="ver-todas" data-category="sillas">Ver todas</a>
+        </div>
+      </article>
     </div>
-    
- </section>
+  </section>
 
   <main class="main-wrap container" id="main">
     <!-- PRODUCTOS / CATÁLOGO -->
@@ -102,45 +136,40 @@
       </div>
 
       <div class="grid" id="grid-productos" aria-live="polite">
-        <!-- Producto 1 -->
-        <article class="producto cabeceros " data-id="cabecero-140-01" data-visible="true">
+        <article class="producto cabeceros" data-id="cabecero-140-01" data-visible="true">
           <span class="etiqueta">Nuevo</span>
           <a href="producto-cabecero.html" class="producto-link" aria-label="Cabecero moderno">
             <img src="img/frente.jpg" alt="Cabecero moderno">
             <h3>Cabecero moderno</h3>
-            <p class="medidas">Medidas: 140 × 70 × 4 cm</p>
+            <p class="medidas">Medidas: 140 x 70 x 4 cm</p>
             <p class="precio">300,00 €</p>
             <p class="entrega">Entrega en 6 - 8 días</p>
           </a>
           <button class="btn-add" onclick="agregarAlCarrito('cabecero-140-01','Cabecero moderno',300.00,'img/cabecero1.jpg')">Añadir al carrito</button>
         </article>
 
-        <!-- Producto 2 -->
         <article class="producto mesitas" data-id="mesita-45-01" data-visible="true">
           <a href="producto-mesita.html" class="producto-link" aria-label="Mesita de noche moderna">
             <img src="img/lado.jpg" alt="Mesita de noche moderna">
             <h3>Mesita de noche moderna</h3>
-            <p class="medidas">Medidas: 45 × 40 × 40 cm</p>
+            <p class="medidas">Medidas: 45 x 40 x 40 cm</p>
             <p class="precio">120,00 €</p>
             <p class="entrega">Entrega en 6 - 8 días</p>
           </a>
           <button class="btn-add" onclick="agregarAlCarrito('mesita-45-01','Mesita de noche moderna',120.00,'img/mesita1.jpg')">Añadir al carrito</button>
         </article>
 
-        <!-- Producto 3 -->
         <article class="producto sillas" data-id="silla-50-01" data-visible="true">
           <span class="etiqueta">Nuevo</span>
           <a href="producto-silla.html" class="producto-link" aria-label="Silla moderna">
             <img src="img/frente.jpg" alt="Silla moderna">
             <h3>Silla moderna</h3>
-            <p class="medidas">Medidas: 50 × 45 × 90 cm</p>
+            <p class="medidas">Medidas: 50 x 45 x 90 cm</p>
             <p class="precio">75,00 €</p>
             <p class="entrega">Entrega en 6 - 8 días</p>
           </a>
           <button class="btn-add" onclick="agregarAlCarrito('silla-50-01','Silla moderna',75.00,'img/silla1.jpg')">Añadir al carrito</button>
         </article>
-
-        <!-- duplicar más productos con la misma estructura -->
       </div>
     </section>
 
@@ -160,12 +189,12 @@
     <section class="reseñas" aria-label="Reseñas de clientes">
       <h2 class="seccion-title">Lo que dicen nuestros clientes</h2>
       <div class="reseña">
-        <div class="estrellas" aria-hidden="true">★★★★★</div>
-        <p><strong>Verificado</strong> — Envío rápido y sencillo, muy fácil de montar y queda muy bien.</p>
+        <div class="estrellas" aria-hidden="true">*****</div>
+        <p><strong>Verificado</strong> - Envío rápido y sencillo, muy fácil de montar y queda muy bien.</p>
       </div>
       <div class="reseña">
-        <div class="estrellas" aria-hidden="true">★★★★☆</div>
-        <p><strong>Verificado</strong> — Excepcional calidad y diseño, encantados con el resultado.</p>
+        <div class="estrellas" aria-hidden="true">*****</div>
+        <p><strong>Verificado</strong> - Excepcional calidad y diseño, encantados con el resultado.</p>
       </div>
       <div class="trustpilot-mini">
         <p>TrustScore 3.5 sobre 5 basado en 7.084 opiniones</p>
@@ -189,74 +218,143 @@
 
   <!-- MODAL PARA GALERÍA -->
   <div id="modal" class="modal" role="dialog" aria-hidden="true" aria-label="Imagen ampliada">
-    <button class="cerrar" onclick="cerrarModal()" aria-label="Cerrar modal">×</button>
+    <button class="cerrar" onclick="cerrarModal()" aria-label="Cerrar modal">x</button>
     <img id="modal-img" src="" alt="">
   </div>
 
   <!-- FOOTER PROFESIONAL -->
   <footer class="footer-pro" role="contentinfo">
-  <div class="footer-grid container">
-    <div class="footer-col">
-      <h4>SOBRE NOSOTROS</h4>
-      <ul>
-        <li><a href="#">Quiénes somos</a></li>
-        <li><a href="#">Compromisos éticos</a></li>
-        <li><a href="#">Condiciones generales</a></li>
-      </ul>
+    <div class="footer-grid container">
+      <div class="footer-col">
+        <h4>SOBRE NOSOTROS</h4>
+        <ul>
+          <li><a href="#">Quiénes somos</a></li>
+          <li><a href="#">Compromisos éticos</a></li>
+          <li><a href="#">Condiciones generales</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>ENLACES DE INTERÉS</h4>
+        <ul>
+          <li><a href="#">Envíos</a></li>
+          <li><a href="#">Devoluciones y cambios</a></li>
+          <li><a href="#">Garantía</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>CONTACTO Y AYUDA</h4>
+        <ul>
+          <li><a href="#">Horario atención</a></li>
+          <li><a href="#">Estado de pedido</a></li>
+          <li><a href="#">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-trust">
+        <h4>OPINIONES</h4>
+        <p class="trust-score">TrustScore <strong>3.5</strong> | 7.084 opiniones</p>
+        <img src="img/trustpilot.png" alt="Trustpilot" class="trust-img">
+      </div>
     </div>
 
-    <div class="footer-col">
-      <h4>ENLACES DE INTERÉS</h4>
-      <ul>
-        <li><a href="#">Envíos</a></li>
-        <li><a href="#">Devoluciones y cambios</a></li>
-        <li><a href="#">Garantía</a></li>
-      </ul>
+    <div class="footer-pagos container">
+      <div class="pagos-inner">
+        <img src="img/visa.png" alt="VISA">
+        <img src="img/mastercard.png" alt="MasterCard">
+        <img src="img/paypal.png" alt="PayPal">
+      </div>
     </div>
 
-    <div class="footer-col">
-      <h4>CONTACTO Y AYUDA</h4>
-      <ul>
-        <li><a href="#">Horario atención</a></li>
-        <li><a href="#">Estado de pedido</a></li>
-        <li><a href="#">Preguntas frecuentes</a></li>
-      </ul>
+    <div class="footer-copy container">
+      <p>@2025 Mi Tienda | Todos los derechos reservados</p>
     </div>
-
-    <div class="footer-col footer-trust">
-      <h4>OPINIONES</h4>
-      <p class="trust-score">TrustScore <strong>3.5</strong> | 7.084 opiniones</p>
-      <img src="img/trustpilot.png" alt="Trustpilot" class="trust-img">
-    </div>
-  </div>
-
-  <div class="footer-pagos container">
-    <div class="pagos-inner">
-      <img src="img/visa.png" alt="VISA">
-      <img src="img/mastercard.png" alt="MasterCard">
-      <img src="img/paypal.png" alt="PayPal">
-      <!-- añade más logos si hace falta -->
-    </div>
-  </div>
-
-  <div class="footer-copy container">
-    <p>©2025 Mi Tienda | Todos los derechos reservados</p>
-  </div>
-</footer>
+  </footer>
 
   <!-- SCRIPT GLOBAL (menú, filtrado, búsqueda, modal, carrito) -->
   <script>
-  /* ===== Menú hamburguesa ===== */
-  function toggleMenu() {
-    const menu = document.getElementById('nav-menu');
-    const btn = document.querySelector('.nav-toggle');
-    if (!menu || !btn) return;
-    const expanded = btn.getAttribute('aria-expanded') === 'true';
-    menu.classList.toggle('show');
-    btn.setAttribute('aria-expanded', String(!expanded));
-  }
+  /* ===== Menú hamburguesa corregido ===== */
+  (function(){
+    const btn = document.getElementById('btn-hamburger');
+    const panel = document.getElementById('nav-panel');
+    const overlay = document.getElementById('nav-overlay');
+    const closeBtn = document.getElementById('btn-close-nav');
 
-  /* ===== Filtrado y búsqueda ===== */
+    function openNav() {
+      if (!panel || !btn) return;
+      panel.classList.add('open');
+      panel.setAttribute('aria-hidden','false');
+      btn.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
+      document.documentElement.classList.add('nav-open');
+      document.body.classList.add('nav-open');
+    }
+
+    function closeNav() {
+      if (!panel || !btn) return;
+      panel.classList.remove('open');
+      panel.setAttribute('aria-hidden','true');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+      document.documentElement.classList.remove('nav-open');
+      document.body.classList.remove('nav-open');
+      btn.focus();
+    }
+
+    if (btn) btn.addEventListener('click', () => {
+      const isOpen = panel && panel.classList.contains('open');
+      isOpen ? closeNav() : openNav();
+    });
+    if (overlay) overlay.addEventListener('click', closeNav);
+    if (closeBtn) closeBtn.addEventListener('click', closeNav);
+
+    // Accordion for submenus
+    document.querySelectorAll('.nav-toggle').forEach(button => {
+      button.addEventListener('click', () => {
+        const targetId = button.getAttribute('aria-controls');
+        const sub = document.getElementById(targetId);
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', String(!expanded));
+        if (!sub) return;
+        if (expanded) {
+          // close
+          sub.style.height = sub.scrollHeight + 'px';
+          requestAnimationFrame(() => {
+            sub.style.transition = 'height .22s ease';
+            sub.style.height = '0px';
+          });
+          sub.addEventListener('transitionend', function te() {
+            sub.hidden = true;
+            sub.style.height = '';
+            sub.style.transition = '';
+            sub.removeEventListener('transitionend', te);
+          });
+        } else {
+          // open
+          sub.hidden = false;
+          const h = sub.scrollHeight;
+          sub.style.height = '0px';
+          requestAnimationFrame(() => {
+            sub.style.transition = 'height .22s ease';
+            sub.style.height = h + 'px';
+          });
+          sub.addEventListener('transitionend', function te() {
+            sub.style.height = '';
+            sub.style.transition = '';
+            sub.removeEventListener('transitionend', te);
+          });
+        }
+      });
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && panel && panel.classList.contains('open')) closeNav();
+    });
+  })();
+
+  /* ===== Filtrado y búsqueda (corrige typos importantes) ===== */
   function filtrar(categoria) {
     const productos = document.querySelectorAll('.producto');
     productos.forEach(producto => {
@@ -270,21 +368,20 @@
   }
 
   function aplicarBusqueda() {
-    const textoRaw = document.getElementById('buscador').value || '';
+    const textoRaw = (document.getElementById('buscador') && document.getElementById('buscador').value) || "";
     const texto = textoRaw.toLowerCase().trim();
     const productos = document.querySelectorAll('.producto');
 
     productos.forEach(producto => {
       const visiblePorCategoria = producto.dataset.visible !== 'false';
-      const nombreEl = producto.querySelector('h3') || producto.querySelector('h4') || producto.querySelector('.producto-link h3');
-      const nombre = nombreEl ? (nombreEl.textContent || '').toLowerCase() : '';
+      const nombreEl = producto.querySelector('h3') || producto.querySelector('h4') || (producto.querySelector('.producto-link h3'));
+      const nombre = nombreEl ? (nombreEl.textContent || "").toLowerCase() : "";
       const precioEl = producto.querySelector('.precio');
-      const precioTexto = precioEl ? (precioEl.textContent || '').replace(/[^\d,\.]/g, '') : '';
+      const precioTexto = precioEl ? (precioEl.textContent || "").replace(/[^\d,\.]/g, "") : "";
       const precioMatch = precioTexto.match(/(\d+)[,.]?(\d{0,2})?/);
       const precio = precioMatch ? parseFloat(precioMatch[1] + '.' + (precioMatch[2] || '00')) : NaN;
-
-      const textoEsNumero = texto !== '' && !isNaN(parseFloat(texto.replace(',', '.')));
-      const coincideNombre = texto === '' ? true : nombre.includes(texto);
+      const textoEsNumero = texto !== "" && !isNaN(parseFloat(texto.replace(',', '.')));
+      const coincideNombre = texto === "" ? true : nombre.includes(texto);
       const coincidePrecio = textoEsNumero && !isNaN(precio) && precio <= parseFloat(texto.replace(',', '.'));
 
       if (!visiblePorCategoria) {
@@ -300,11 +397,8 @@
   /* ===== Modal galería ===== */
   const modal = document.getElementById('modal');
   const modalImg = document.getElementById('modal-img');
-
   document.querySelectorAll('.grid-social img').forEach(img => {
-    img.addEventListener('click', () => {
-      abrirModal(img);
-    });
+    img.addEventListener('click', () => abrirModal(img));
     img.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
@@ -318,8 +412,7 @@
     modal.style.display = 'flex';
     modal.setAttribute('aria-hidden', 'false');
     modalImg.src = img.src;
-    modalImg.alt = img.alt || '';
-    // focus management
+    modalImg.alt = img.alt || "";
     modal.querySelector('.cerrar')?.focus();
   }
 
@@ -327,12 +420,12 @@
     if (!modal || !modalImg) return;
     modal.style.display = 'none';
     modal.setAttribute('aria-hidden', 'true');
-    modalImg.src = '';
-    modalImg.alt = '';
+    modalImg.src = "";
+    modalImg.alt = "";
   }
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.style.display === 'flex') cerrarModal();
+    if (e.key === 'Escape' && modal && modal.style.display === 'flex') cerrarModal();
   });
 
   /* ===== Carrito (localStorage) ===== */
@@ -381,7 +474,7 @@
     toast._t = setTimeout(()=>{ toast.style.opacity='0'; }, 1500);
   }
 
-  /* Inicialización al cargar */
+  /* Inicialización */
   document.addEventListener('DOMContentLoaded', () => {
     actualizarContadorCarrito();
 
@@ -389,77 +482,27 @@
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const cat = link.dataset.category || 'todos';
-        if (!cat) return;
-        //aplicar filtro visual
-        filtrar(cat); 
-        //marcar botón activo visualmente en los filtros
+        filtrar(cat);
         marcarFiltroActivo(cat);
-        //actualizar hash (no provoca cambio brusco si usamos scrollIntoView después)
-        history.replaceState(null, '', '#catalogo?categoria=' + encodeURIComponent(cat));
-        //Hacer scroll suave al catálogo(ajusta offset si tienes header sticky )
+        history.replaceState(null, "", '#catalogo?categoria=' + encodeURIComponent(cat));
         const catalogo = document.getElementById('catalogo');
         if (catalogo) {
-            //calcula offset para header sticky
-            const header = document.querySelector('header');
-            const headerHeight = header ? header.getBoundingClientRect().height : 0;
-            const top = catalogo.getBoundingClientRect().top + window.scrollY    - headerHeight - 12; //12px margen extra
-            window.scrollTo({ top, behavior: 'smooth' });
+          const header = document.querySelector('header');
+          const headerHeight = header ? header.getBoundingClientRect().height : 0;
+          const top = catalogo.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+          window.scrollTo({ top, behavior: 'smooth' });
         }
       });
     });
-
-    //funcion auxiliar para marcar botón de filtro activo
-    function marcarFiltroActivo(categoria) {
-        //quitar clase avtive de botones de filtros
-        document.querySelectorAll('.filtros button').forEach(btn => {
-          btn.classList.remove('activo');
-        });
-        //buscar el boton correspondiente y marcarlo 
-        const map = {
-          'cabeceros': 'Cabeceros',
-          'mesitas': 'Mesitas de noche',
-          'sillas': 'Sillas',
-          'todos': 'Todos'
-        };
-        //encontramos por data o por texto
-        const btn = Array.from(document.querySelectorAll('.filtros button')).find(b => {
-          //preferimos comparar con dataset si lo has puesto, sino comparamos texto
-          return (b.dataset && b.dataset.category === categoria) || (b.textContent && b.textContent.toLowerCase().includes(categoria));
-        });
-        if (btn) btn.classList.add('activo');
-        }
-
-    // cerrar menu tocando fuera (móvil)
-    document.addEventListener('click', (e) => {
-      const menu = document.getElementById('nav-menu');
-      const btn = document.querySelector('.nav-toggle');
-      if (!menu || !btn) return;
-      if (menu.classList.contains('show') && !menu.contains(e.target) && !btn.contains(e.target)) {
-        menu.classList.remove('show');
-        btn.setAttribute('aria-expanded','false');
-      }
-    });
-
-    // Si la Url trae ?cat=... aplicamos filtro al cargar
-    document.addEventListener('DOMContentLoaded', () => {
-      // tu iniciacion previa...
-      actualizarContadorCarrito();
-
-      //Comprobacion de query string
-      const params = new URLSearchParams(window.location.hash.replace(/^#/, '').replace('?', '&'));
-      //tambien comprobamos si usamos location.search en caso de que prefieras ?cat=
-      const searchParams = new URLSearchParams(window.location.search);
-      const catParam = searchParams.get('cat') || params.get('cat');
-        if (catParam) {
-            filtrar(catParam);
-            marcarFiltroActivo(catParam);
-            //opcional: hacer scroll al catálogo
-            const catalogo = document.getElementById('catalogo');
-            if (catalogo) (catalogo.scrollIntoView({ behavior: 'smooth', block: 'start' }));
-
-        }
-    });
   });
+
+  function marcarFiltroActivo(categoria) {
+    document.querySelectorAll('.filtros button').forEach(btn => btn.classList.remove('activo'));
+    const btn = Array.from(document.querySelectorAll('.filtros button')).find(b => {
+      return (b.dataset && b.dataset.category === categoria) || (b.textContent && b.textContent.toLowerCase().includes(categoria));
+    });
+    if (btn) btn.classList.add('activo');
+  }
   </script>
 </body>
 </html>

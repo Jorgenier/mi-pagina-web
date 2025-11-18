@@ -30,15 +30,15 @@
 
     <div class="galeria">
       <div class="imagen-principal">
-        <img id="imagenGrande" src="img/cabecero1.jpg" alt="Cabecero moderno - vista frontal" style="max-width:100%;cursor:pointer;">
+        <img id="imagenGrande" src="img/frente.jpg" alt="Cabecero moderno - vista frontal" style="max-width:100%;cursor:pointer;">
       </div>
 
       <div class="miniaturas" aria-label="Miniaturas">
-        <img src="img/cabecero1.jpg" alt="Frontal" onclick="mostrarImagen(this)" tabindex="0" />
-        <img src="img/frente.jpg" alt="Lateral" onclick="mostrarImagen(this)" tabindex="0" />
-        <img src="img/detalle.jpg" alt="Detalle" onclick="mostrarImagen(this)" tabindex="0" />
+        <img src="img/frente.jpg" alt="Frontal" onclick="mostrarImagen(this)" tabindex="0" />
+        <img src="img/lado.jpg" alt="Lateral" onclick="mostrarImagen(this)" tabindex="0" />
+        <img src="img/frente.jpg" alt="Detalle" onclick="mostrarImagen(this)" tabindex="0" />
       </div>
-    </div>
+    </div> 
 
     <h1>Cabecero moderno</h1>
     <p><strong>Medidas:</strong> 140 × 70 × 4 cm</p>
@@ -86,5 +86,66 @@
     // Keep header counter in sync
     document.addEventListener('DOMContentLoaded', ()=>{ actualizarContadorCarrito(); });
   </script>
+
+   <!-- Carrito en localStorage -->
+<script>
+function agregarAlCarrito(id, nombre, precio, imagen) {
+  const producto = { id, nombre, precio: Number(precio), imagen };
+  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  carrito.push(producto);
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+  actualizarContadorCarrito();
+  <!-- feedback visual ligero-->
+  mostrarToast('Añadido al carrito');
+}
+function mostrarToast(mensaje) {
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = mensaje;
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.remove();
+  }, 2000);
+} 
+</script>
+  <!-- Actualiza contador del header -->
+  <script>
+  function actualizarContadorCarrito() {
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const contador = document.getElementById('contador-carrito');
+    if (contador) contador.textContent = carrito.length;
+  }
+  actualizarContadorCarrito();
+  </script>
+
+  <!-- Mostrar toast pequeño en pantalla (no intrusivo) -->
+  <script>
+function mostrarToast(texto) {
+  let toast = document.getElementById('toast-carrito');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'toast-carrito';
+    toast.style.position = 'fixed';
+    toast.style.right = '16px';
+    toast.style.bottom = '18px';
+    toast.style.background = 'rgba(0,0,0,0.8)';
+    toast.style.color = '#fff';
+    toast.style.padding = '8px 12px';
+    toast.style.borderRadius = '8px';
+    toast.style.zIndex = '2000';
+    toast.style.fontSize = '0.95rem';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = texto;
+  toast.style.opacity = '1';
+  clearTimeout(toast._t);
+  toast._t = setTimeout(()=>{ toast.style.opacity='0'; }, 1700);
+}
+
+ //Inicializaciones al cargar la página 
+document.addEventListener('DOMContentLoaded', () => {
+  actualizarContadorCarrito();
+});
+</script>
 </body>
 </html>

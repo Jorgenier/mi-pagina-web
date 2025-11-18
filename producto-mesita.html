@@ -3,10 +3,11 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mesita de noche moderna | Mi Tienda</title>
+  <title>Cabecero moderno | Mi Tienda</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Header (igual que index.html) -->
   <header>
     <div class="header-inner container">
       <a class="brand" href="index.html"><img src="img/logo.png" alt="Mi Tienda" class="logo"><span class="brand-text">Mi Tienda</span></a>
@@ -29,38 +30,122 @@
 
     <div class="galeria">
       <div class="imagen-principal">
-        <img id="imagenGrande" src="img/mesita1.jpg" alt="Mesita moderna - vista frontal" style="max-width:100%;cursor:pointer;">
+        <img id="imagenGrande" src="img/frente.jpg" alt="Mesita moderna - vista frontal" style="max-width:100%;cursor:pointer;">
       </div>
 
       <div class="miniaturas" aria-label="Miniaturas">
-        <img src="img/mesita1.jpg" alt="Frente" onclick="mostrarImagen(this)" tabindex="0" />
+        <img src="img/frente.jpg" alt="Frontal" onclick="mostrarImagen(this)" tabindex="0" />
         <img src="img/lado.jpg" alt="Lateral" onclick="mostrarImagen(this)" tabindex="0" />
+        <img src="img/frente.jpg" alt="Detalle" onclick="mostrarImagen(this)" tabindex="0" />
       </div>
-    </div>
+    </div> 
 
     <h1>Mesita de noche moderna</h1>
-    <p><strong>Medidas:</strong> 45 × 40 × 40 cm</p>
-    <p class="precio"><strong>Precio:</strong> 120,00 €</p>
+    <p><strong>Medidas:</strong> 45 × 40 × 4 cm</p>
+    <p class="precio"><strong>Precio:</strong> 30,00 €</p>
     <p class="entrega"><strong>Entrega:</strong> 6 - 8 días</p>
 
-    <section aria-label="Descripción"><h2>Descripción</h2><p>Mesita de noche con acabado contemporáneo, cajón suave y superficie resistente. Perfecta para ambientes minimalistas.</p></section>
+    <section aria-label="Descripción">
+      <h2>Descripción</h2>
+      <p>Mesita de noche con acabado contemporáneo, cajón suave y superficie resistente. Perfecta para ambientes minimalistas.</p>
+    </section>
 
-    <button class="btn-add" onclick="agregarAlCarrito('mesita-45-01','Mesita de noche moderna',120.00,'img/mesita1.jpg')">Añadir al carrito</button>
+    <button class="btn-add" onclick="agregarAlCarrito('mesita-140-01','Mesita de noche moderna',30.00,'img/mesita1.jpg')">Añadir al carrito</button>
   </main>
 
+  <!-- Modal para imagen grande -->
   <div id="modal" class="modal" role="dialog" aria-hidden="true" aria-label="Imagen ampliada">
     <button class="cerrar" onclick="cerrarModal()" aria-label="Cerrar modal">×</button>
     <img id="modal-img" src="" alt="">
   </div>
 
-  <footer class="footer-pro" role="contentinfo"><div class="footer-copy container"><p>©2025 Mi Tienda | Todos los derechos reservados</p></div></footer>
+  <!-- Footer (igual que index.html) -->
+  <footer class="footer-pro" role="contentinfo">
+    <div class="footer-copy container"><p>©2025 Mi Tienda | Todos los derechos reservados</p></div>
+  </footer>
 
   <script>
-    function mostrarImagen(img) { const imagenGrande = document.getElementById('imagenGrande'); imagenGrande.src = img.src; imagenGrande.alt = img.alt || ''; }
-    document.getElementById('imagenGrande').addEventListener('click', ()=>{ abrirModal(document.getElementById('imagenGrande')); });
-    function cerrarModal(){ const modal = document.getElementById('modal'); const modalImg = document.getElementById('modal-img'); modal.style.display='none'; modal.setAttribute('aria-hidden','true'); modalImg.src=''; modalImg.alt=''; }
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') cerrarModal(); });
+    function mostrarImagen(img) {
+      const imagenGrande = document.getElementById('imagenGrande');
+      imagenGrande.src = img.src;
+      imagenGrande.alt = img.alt || '';
+    }
+    document.getElementById('imagenGrande').addEventListener('click', () => {
+      const img = document.getElementById('imagenGrande');
+      abrirModal(img);
+    });
+    function cerrarModal() {
+      const modal = document.getElementById('modal');
+      const modalImg = document.getElementById('modal-img');
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden','true');
+      modalImg.src = '';
+      modalImg.alt = '';
+    }
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') cerrarModal(); });
+    // Keep header counter in sync
     document.addEventListener('DOMContentLoaded', ()=>{ actualizarContadorCarrito(); });
   </script>
+
+   <!-- Carrito en localStorage -->
+<script>
+function agregarAlCarrito(id, nombre, precio, imagen) {
+  const producto = { id, nombre, precio: Number(precio), imagen };
+  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+  carrito.push(producto);
+  localStorage.setItem('carrito', JSON.stringify(carrito));
+  actualizarContadorCarrito();
+  <!-- feedback visual ligero-->
+  mostrarToast('Añadido al carrito');
+}
+function mostrarToast(mensaje) {
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = mensaje;
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.remove();
+  }, 2000);
+} 
+</script>
+  <!-- Actualiza contador del header -->
+  <script>
+  function actualizarContadorCarrito() {
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const contador = document.getElementById('contador-carrito');
+    if (contador) contador.textContent = carrito.length;
+  }
+  actualizarContadorCarrito();
+  </script>
+
+  <!-- Mostrar toast pequeño en pantalla (no intrusivo) -->
+  <script>
+function mostrarToast(texto) {
+  let toast = document.getElementById('toast-carrito');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'toast-carrito';
+    toast.style.position = 'fixed';
+    toast.style.right = '16px';
+    toast.style.bottom = '18px';
+    toast.style.background = 'rgba(0,0,0,0.8)';
+    toast.style.color = '#fff';
+    toast.style.padding = '8px 12px';
+    toast.style.borderRadius = '8px';
+    toast.style.zIndex = '2000';
+    toast.style.fontSize = '0.95rem';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = texto;
+  toast.style.opacity = '1';
+  clearTimeout(toast._t);
+  toast._t = setTimeout(()=>{ toast.style.opacity='0'; }, 1700);
+}
+
+ //Inicializaciones al cargar la página 
+document.addEventListener('DOMContentLoaded', () => {
+  actualizarContadorCarrito();
+});
+</script>
 </body>
 </html>
