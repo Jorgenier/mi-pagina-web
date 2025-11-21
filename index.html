@@ -451,6 +451,8 @@
     if (contador) contador.textContent = totalCant;
   }
 
+  document.addEventListener('DOMContentLoaded', actualizarContadorCarrito);
+
   function mostrarToast(texto) {
     let toast = document.getElementById('toast-carrito');
     if (!toast) {

@@ -112,10 +112,12 @@ function mostrarToast(mensaje) {
   <script>
   function actualizarContadorCarrito() {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const totalCant = carrito.reduce((s, it) => s + (Number(it.cantidad) || 0), 0);
     const contador = document.getElementById('contador-carrito');
-    if (contador) contador.textContent = carrito.length;
+    if (contador) contador.textContent = totalCant;
   }
-  actualizarContadorCarrito();
+
+  document.addEventListener('DOMContentLoaded', actualizarContadorCarrito);
   </script>
 
   <!-- Mostrar toast pequeño en pantalla (no intrusivo) -->
