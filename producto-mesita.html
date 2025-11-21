@@ -50,9 +50,9 @@
       <p>Mesita de noche con acabado contemporáneo, cajón suave y superficie resistente. Perfecta para ambientes minimalistas.</p>
     </section>
 
-    <button class="btn-add" onclick="agregarAlCarrito('mesita-140-01','Mesita de noche moderna',30.00,'img/mesita1.jpg')">Añadir al carrito</button>
+    <button class="btn-add" onclick="agregarAlCarrito('mesita-45-01')">Añadir al carrito</button>
   </main>
-
+ 
   <!-- Modal para imagen grande -->
   <div id="modal" class="modal" role="dialog" aria-hidden="true" aria-label="Imagen ampliada">
     <button class="cerrar" onclick="cerrarModal()" aria-label="Cerrar modal">×</button>
@@ -90,32 +90,28 @@
    <!-- Carrito en localStorage -->
 <script>
 function agregarAlCarrito(id, nombre, precio, imagen) {
-  const producto = { id, nombre, precio: Number(precio), imagen };
-  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-  carrito.push(producto);
-  localStorage.setItem('carrito', JSON.stringify(carrito));
-  actualizarContadorCarrito();
-  <!-- feedback visual ligero-->
-  mostrarToast('Añadido al carrito');
-}
-function mostrarToast(mensaje) {
-  const toast = document.createElement('div');
-  toast.className = 'toast';
-  toast.textContent = mensaje;
-  document.body.appendChild(toast);
-  setTimeout(() => {
-    toast.remove();
-  }, 2000);
-} 
+    const producto = { id, nombre, precio: Number(precio), imagen };
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const idx = carrito.findIndex(p => p.id === id);
+    if (idx > -1) {
+      carrito[idx].cantidad = (carrito[idx].cantidad || 1) + 1;
+    } else {
+      producto.cantidad = 1;
+      carrito.push(producto);
+    }
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    actualizarContadorCarrito();
+    mostrarToast('Añadido al carrito');
+  }
 </script>
   <!-- Actualiza contador del header -->
   <script>
   function actualizarContadorCarrito() {
     const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const totalCant = carrito.reduce((s, it) => s + (Number(it.cantidad) || 0), 0);
     const contador = document.getElementById('contador-carrito');
-    if (contador) contador.textContent = carrito.length;
+    if (contador) contador.textContent = totalCant;
   }
-  actualizarContadorCarrito();
   </script>
 
   <!-- Mostrar toast pequeño en pantalla (no intrusivo) -->

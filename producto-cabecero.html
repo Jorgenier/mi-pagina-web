@@ -50,7 +50,7 @@
       <p>Cabecero tapizado de diseño moderno, con acabado capitoné y detalles de costura artesanal. Materiales resistentes y fácil montaje.</p>
     </section>
 
-    <button class="btn-add" onclick="agregarAlCarrito('cabecero-140-01','Cabecero moderno',300.00,'img/cabecero1.jpg')">Añadir al carrito</button>
+    <button class="btn-add" onclick="agregarAlCarrito('cabecero-140-01')">Añadir al carrito</button>
   </main>
 
   <!-- Modal para imagen grande -->
@@ -90,23 +90,19 @@
    <!-- Carrito en localStorage -->
 <script>
 function agregarAlCarrito(id, nombre, precio, imagen) {
-  const producto = { id, nombre, precio: Number(precio), imagen };
-  const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-  carrito.push(producto);
-  localStorage.setItem('carrito', JSON.stringify(carrito));
-  actualizarContadorCarrito();
-  <!-- feedback visual ligero-->
-  mostrarToast('Añadido al carrito');
-}
-function mostrarToast(mensaje) {
-  const toast = document.createElement('div');
-  toast.className = 'toast';
-  toast.textContent = mensaje;
-  document.body.appendChild(toast);
-  setTimeout(() => {
-    toast.remove();
-  }, 2000);
-} 
+    const producto = { id, nombre, precio: Number(precio), imagen };
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const idx = carrito.findIndex(p => p.id === id);
+    if (idx > -1) {
+      carrito[idx].cantidad = (carrito[idx].cantidad || 1) + 1;
+    } else {
+      producto.cantidad = 1;
+      carrito.push(producto);
+    }
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    actualizarContadorCarrito();
+    mostrarToast('Añadido al carrito');
+  }
 </script>
   <!-- Actualiza contador del header -->
   <script>
@@ -116,8 +112,6 @@ function mostrarToast(mensaje) {
     const contador = document.getElementById('contador-carrito');
     if (contador) contador.textContent = totalCant;
   }
-
-  document.addEventListener('DOMContentLoaded', actualizarContadorCarrito);
   </script>
 
   <!-- Mostrar toast pequeño en pantalla (no intrusivo) -->
